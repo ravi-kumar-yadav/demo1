@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     private Coach coach;
-    private Coach anotherCoach;
 
 //    Constructor Injection
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach theCoach, @Qualifier("cricketCoach") Coach theAnotherCoach){
+    public DemoController(@Qualifier("swimCoach") Coach theCoach){
         System.out.println("In Constructor: " + getClass().getSimpleName());
         coach = theCoach;
-        anotherCoach = theAnotherCoach;
     }
 
     /*
@@ -39,11 +37,5 @@ public class DemoController {
     public String getDailyWorkout(){
         System.out.println("In method getDailyWorkout");
         return coach.getDailyWorkout();
-    }
-
-    // SCOPE_SINGLETON (default)
-    @GetMapping("/check")
-    public String checkBean(){
-        return "Comparing beans, coach == anotherCoach: " + (coach == anotherCoach);
     }
 }
