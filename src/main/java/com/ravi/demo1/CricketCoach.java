@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Lazy
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class CricketCoach implements Coach{
 
     public CricketCoach(){
