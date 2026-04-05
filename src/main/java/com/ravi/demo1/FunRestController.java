@@ -13,7 +13,7 @@ public class FunRestController {
     @Value("${project.country}")
     private String projectCountry;
 
-    @GetMapping("/")
+    @GetMapping("/fun")
     public String getMethod(){
         System.out.println("Project Name: " + projectName + ", Project Country: " + projectCountry);
         return "Hello World!!!";
