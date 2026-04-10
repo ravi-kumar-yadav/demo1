@@ -1,5 +1,7 @@
 package com.ravi.demo1;
 
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -48,9 +50,30 @@ public class Demo1Application {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(String[] args){
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
 			System.out.println("Started Command Line Runner!!!");
+
+			Student tempStudent = new Student();
+			tempStudent.setFirstName("Ram");
+			tempStudent.setLastName("Suryavanshi");
+			tempStudent.setEmail("ram.suryavanshi@ayodhya.com");
+
+			studentDAO.save(tempStudent);
+
+			System.out.println("Saved student. Generated ID: " + tempStudent.getId());
+
+			Student retrievedStudent = studentDAO.findById(tempStudent.getId());
+			System.out.println("Retrieved student: " + retrievedStudent);
+
+			List<Student> students = studentDAO.findByLastName("Suryavanshi");
+			System.out.println("Students: " + students);
+
+			// update lastName from suryavanshi to kumar
+			String newLastName = "Kumar";
+			int rowsUpdated = studentDAO.updateLastName(newLastName);
+			System.out.println("Rows updated with new last name 'Kumar': " + rowsUpdated);
+
 		};
 	}
 
